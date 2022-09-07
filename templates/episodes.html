@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+    {% for index in range(len(episode_names)) %}
+
+        <button onclick="location.href = '{{episode_codes[index]}}'">{{episode_names[index]}}</button>
+
+    {% endfor %}
+
+{% endblock %}
