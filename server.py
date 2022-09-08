@@ -32,12 +32,27 @@ def episodes():
     episode_codes = []
 
     for link in soup.find_all("a"):
-        if link.get("data-episode-id"):
+        if link.get("data-episode-id") and link.get("data-id"):
+            print(link)
             episode_names.append(link.decode_contents())
             episode_codes.append(link.get("href").replace("play/", "play?code="))
 
-    episode_names = episode_names[len(episode_names)//2:]
-    episode_codes = episode_codes[len(episode_codes)//2:]
+    index_to_remove = 0
+    first_index = 0
+    index = 0
+    for episode_name in episode_names:
+        if index == 0:
+            first_index = episode_name
+        
+        if episode_name == first_index:
+            index_to_remove = index
+
+        index = index + 1
+        
+    print(index_to_remove)
+
+    episode_names = episode_names[:len(episode_names) - index_to_remove]
+    episode_codes = episode_codes[:len(episode_codes) - index_to_remove]
     
     return render_template("episodes.html", episode_names=episode_names, episode_codes=episode_codes, len=len)
 
