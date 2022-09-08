@@ -5,10 +5,14 @@
 
 {% block body %}
 
-    {% for index in range(len(episode_names)) %}
+    <center>
 
-        <button onclick="location.href = '{{episode_codes[index]}}'">{{episode_names[index]}}</button>
+    {% for index in range( len(episode_codes) ) %}
+        <button class="list" onclick="location.href = '{{episode_codes[index]}}'">{{episode_names[index]}}</button>
 
+        {% if (index + 1) % 8 == 0 %}
+            </center><br><center>
+        {% endif %}
     {% endfor %}
 
 {% endblock %}

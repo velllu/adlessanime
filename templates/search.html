@@ -5,6 +5,6 @@
 
 {% block body %}
     {% for anime_name, anime_link in zip(anime_names, anime_links) %}
-        <a href="{{anime_link}}">{{anime_name}}</a> <br>
+        <center><a href="{{anime_link}}">{{anime_name}}</a></center> <br>
     {% endfor %}
 {% endblock %}

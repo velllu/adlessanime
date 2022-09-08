@@ -36,6 +36,9 @@ def episodes():
             episode_names.append(link.decode_contents())
             episode_codes.append(link.get("href").replace("play/", "play?code="))
 
+    episode_names = episode_names[len(episode_names)//2:]
+    episode_codes = episode_codes[len(episode_codes)//2:]
+    
     return render_template("episodes.html", episode_names=episode_names, episode_codes=episode_codes, len=len)
 
 @app.route("/play")
@@ -49,4 +52,4 @@ def play():
     return render_template("play.html", video_link=video_link.replace("download-file.php?id=", ""))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(debug=True)
