@@ -12,4 +12,34 @@
         </video>
     </div>
 
+    <div id="control_btns">
+        <button id="saw_btn" class="control_btn">I saw this</button>
+        <button id="not_saw_btn" class="control_btn">I didn't saw this</button>
+
+        <br>
+        <button id="back_btn" class="control_btn">Back</button>
+    </div>
+
+    <script>
+        if(localStorage.getItem("{{code}}") == "saw") {
+            document.getElementById("saw_btn").disabled = true
+            document.getElementById("not_saw_btn").disabled = false
+        } else {
+            document.getElementById("saw_btn").disabled = false
+            document.getElementById("not_saw_btn").disabled = true
+        }
+
+        saw_btn.addEventListener("click", () => {
+            localStorage.setItem("{{code}}", "saw")
+        });
+        not_saw_btn.addEventListener("click", () => {
+            console.log("removed")
+            localStorage.removeItem("{{code}}")
+        });
+
+        back_btn.addEventListener("click", () => {
+            location.href = "/episodes?anime={{code.split('/')[0]}}"
+        })
+    </script>
+
 {% endblock %}

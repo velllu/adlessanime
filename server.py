@@ -49,7 +49,7 @@ def play():
     video_link = soup.find("a", id="downloadLink").get("href")
 
     print(video_link)
-    return render_template("play.html", video_link=video_link.replace("download-file.php?id=", ""))
+    return render_template("play.html", video_link=video_link.replace("download-file.php?id=", ""), code=request.args.get("code"))
 
 if __name__ == "__main__":
     app.run(debug=True)

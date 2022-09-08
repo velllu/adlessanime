@@ -13,6 +13,16 @@
         {% if (index + 1) % 8 == 0 %}
             </center><br><center>
         {% endif %}
+
     {% endfor %}
+
+    <script>
+        var buttons = document.getElementsByClassName("list");
+        for (let i = 0; i < buttons.length; i++) {
+            if(localStorage.getItem(buttons[i].getAttribute("onclick").split("'")[1].split("=")[1]) == "saw") {
+                buttons[i].classList += " saw"
+            }
+        }
+    </script>
 
 {% endblock %}
