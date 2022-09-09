@@ -63,4 +63,10 @@ def play():
     return render_template("play.html", video_link=video_link.replace("download-file.php?id=", ""), code=request.args.get("code"))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port_file = open("port.txt")
+
+    port = port_file.readline()
+
+    port_file.close()
+
+    app.run(port=port, debug=True)
