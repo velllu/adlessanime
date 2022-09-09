@@ -33,7 +33,6 @@ def episodes():
 
     for link in soup.find_all("a"):
         if link.get("data-episode-id") and link.get("data-id"):
-            print(link)
             episode_names.append(link.decode_contents())
             episode_codes.append(link.get("href").replace("play/", "play?code="))
 
@@ -49,8 +48,6 @@ def episodes():
 
         index = index + 1
         
-    print(index_to_remove)
-
     episode_names = episode_names[:len(episode_names) - index_to_remove]
     episode_codes = episode_codes[:len(episode_codes) - index_to_remove]
     
@@ -63,7 +60,6 @@ def play():
 
     video_link = soup.find("a", id="downloadLink").get("href")
 
-    print(video_link)
     return render_template("play.html", video_link=video_link.replace("download-file.php?id=", ""), code=request.args.get("code"))
 
 if __name__ == "__main__":
