@@ -20,8 +20,6 @@ def search():
     for image in imagesHtml:
             images.append(image.get("src"))
         
-    print(images)
-
     anime_names = []
     anime_links = []
     for anime in anime_list:
