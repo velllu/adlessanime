@@ -68,4 +68,4 @@ def play():
     return render_template("play.html", video_link=video_link.replace("download-file.php?id=", ""), code=request.args.get("code"))
 
 if __name__ == "__main__":
-    app.run(port=20104, debug=True)
+    app.run(debug=True, port=10138, host='0.0.0.0')
