@@ -15,13 +15,20 @@ def search():
 
     anime_list = soup.find_all("a", class_="name")
 
+    imagesHtml = soup.find_all("img", loading="lazy")
+    images = []
+    for image in imagesHtml:
+            images.append(image.get("src"))
+        
+    print(images)
+
     anime_names = []
     anime_links = []
     for anime in anime_list:
         anime_names.append(anime.get("data-jtitle"))
         anime_links.append(anime.get("href").replace("play/", "episodes?anime="))
 
-    return render_template("search.html", anime_names=anime_names, anime_links=anime_links, zip=zip)
+    return render_template("search.html", anime_names=anime_names, anime_links=anime_links, anime_images=images, len=len)
 
 @app.route('/episodes')
 def episodes():
@@ -63,10 +70,4 @@ def play():
     return render_template("play.html", video_link=video_link.replace("download-file.php?id=", ""), code=request.args.get("code"))
 
 if __name__ == "__main__":
-    port_file = open("port.txt")
-
-    port = port_file.readline()
-
-    port_file.close()
-
-    app.run(port=port, debug=True)
+    app.run(port=20104, debug=True)
