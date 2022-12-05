@@ -1,16 +1,42 @@
 {% extends 'base.html' %}
 
 {% block head %}
+    <style>
+        span {
+            align-self: flex-end;
+        }
+        
+        #description {
+            color: white;
+            text-align: justify;
+            display: flex;
+            width: 700px;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 210px;
+            height: 210px;
+            margin-right: 10px;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
+
+    <center>
+        <p id="description">
+            <img src="{{animeImage}}">
+            <span>{{animeDescription}}</span>
+        </p>
+    </center>
 
     <center>
 
     {% for index in range( len(animeCodes) ) %}
         <button class="list" onclick="location.href = '{{animeCodes[index]}}'">{{animeNames[index]}}</button>
 
-        {% if (index + 1) % 8 == 0 %}
+        {% if (index + 1) % 10 == 0 %}
             </center><br><center>
         {% endif %}
 

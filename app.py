@@ -31,8 +31,8 @@ def episodes():
     url = requests.get("https://www.animeworld.tv/play/" + request.args.get("anime"))
     soup = bs4.BeautifulSoup(url.text, "html.parser")
 
-    animeDescription = soup.find_all("meta")[0].get("content")
-    print(animeDescription)
+    animeImage = soup.find_all("img", loading="lazy")[6].get("src") # e.g. https://img.animeworld.tv/locandine/17407.jpg
+    animeDescription = soup.find_all("meta")[0].get("content") # e.g. Trama di One Piece SUB ITA: Monkey D. Rufy è un giovane pirata sognatore che da piccolo...
 
     animeNames = [] # e.g. 36-37, 340
     animeCodes = [] # e.g. /play?code=naruto-shippuden.3Q_-m/1Avo3
@@ -55,10 +55,10 @@ def episodes():
         index = index + 1
 
     # Split the array after first repetition because for some reason episode_names/codes are repeated
-    animeNames = animeNames[:len(animeNames)]
-    animeCodes = animeCodes[:len(animeCodes)]
+    animeNames = animeNames[:len(animeNames) - indexToRemove]
+    animeCodes = animeCodes[:len(animeCodes) - indexToRemove]
     
-    return render_template("episodes.html", animeNames=animeNames, animeCodes=animeCodes, len=len)
+    return render_template("episodes.html", animeNames=animeNames, animeCodes=animeCodes, animeDescription=animeDescription, animeImage=animeImage, len=len)
 
 @app.route("/play")
 def play():
