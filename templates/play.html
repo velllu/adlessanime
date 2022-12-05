@@ -8,7 +8,7 @@
 
     <div id="playdiv">
         <video autoplay="autoplay" controls>
-            <source src="{{video_link}}" type="video/mp4" codecs="avc1.42E01E, mp4a.40.2">
+            <source src="{{animeVideoLink}}" type="video/mp4" codecs="avc1.42E01E, mp4a.40.2">
         </video>
     </div>
 
@@ -38,7 +38,7 @@
         });
 
         back_btn.addEventListener("click", () => {
-            location.href = "/episodes?anime={{code.split('/')[0]}}"
+            location.href = "/episodes?anime={{animeCode.split('/')[0]}}"
         })
     </script>
 

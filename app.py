@@ -13,10 +13,10 @@ def search():
     url = requests.get("https://www.animeworld.tv/search?keyword=" + request.args.get("search"))
     soup = bs4.BeautifulSoup(url.text, "html.parser")
 
-    imagesHTML = soup.find_all("img", loading="lazy") # All the <img> elements of the anime covers
-    images = [] # All urls to the images collected in a list
-    for image in imagesHTML:
-        images.append(image.get("src"))
+    animeImagesHTML = soup.find_all("img", loading="lazy") # All the <img> elements of the anime covers
+    animeImages = [] # All urls to the images collected in a list
+    for image in animeImagesHTML:
+        animeImages.append(image.get("src"))
         
     animeNames = [] # Names of anime (e.g. "Naruto Shippuden")
     animeLinks = [] # URLs that redirect to the anime
@@ -24,12 +24,15 @@ def search():
         animeNames.append(anime.get("data-jtitle"))
         animeLinks.append(anime.get("href").replace("play/", "episodes?anime="))
 
-    return render_template("search.html", anime_names=animeNames, anime_links=animeLinks, anime_images=images, len=len)
+    return render_template("search.html", animeNames=animeNames, animeLinks=animeLinks, animeImages=animeImages, len=len)
 
 @app.route('/episodes')
 def episodes():
     url = requests.get("https://www.animeworld.tv/play/" + request.args.get("anime"))
     soup = bs4.BeautifulSoup(url.text, "html.parser")
+
+    animeDescription = soup.find_all("meta")[0].get("content")
+    print(animeDescription)
 
     animeNames = [] # e.g. 36-37, 340
     animeCodes = [] # e.g. /play?code=naruto-shippuden.3Q_-m/1Avo3
@@ -55,7 +58,7 @@ def episodes():
     animeNames = animeNames[:len(animeNames)]
     animeCodes = animeCodes[:len(animeCodes)]
     
-    return render_template("episodes.html", episode_names=animeNames, episode_codes=animeCodes, len=len)
+    return render_template("episodes.html", animeNames=animeNames, animeCodes=animeCodes, len=len)
 
 @app.route("/play")
 def play():
@@ -64,7 +67,7 @@ def play():
 
     animeVideoLink = soup.find("a", id="downloadLink").get("href")
 
-    return render_template("play.html", video_link=animeVideoLink.replace("download-file.php?id=", ""), code=request.args.get("code"))
+    return render_template("play.html", animeVideoLink=animeVideoLink.replace("download-file.php?id=", ""), animeCode=request.args.get("code"))
 
 if __name__ == "__main__":
     app.run(debug=True, port=10138, host='0.0.0.0')

@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block body %}
-    {% for i in range(len(anime_names)) %}
-        <img src="{{anime_images[i]}}">
-        <center><a href="{{anime_links[i]}}">{{anime_names[i]}}</a></center> <br>
+    {% for i in range(len(animeNames)) %}
+        <img src="{{animeImages[i]}}">
+        <center><a href="{{animeLinks[i]}}">{{animeNames[i]}}</a></center> <br>
     {% endfor %}
 {% endblock %}
