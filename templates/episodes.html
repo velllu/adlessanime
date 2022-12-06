@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <style>
+<style>
+        .list {
+            width: 50px;
+        }
+
         span {
             align-self: flex-end;
         }
@@ -11,8 +15,13 @@
             text-align: justify;
             display: flex;
             align-items: center;
-            width: 700px;
-            margin-bottom: 10px;
+            width: clamp(100px, 90%, 1000px);
+            margin-bottom: 20px;
+            margin-top: 20px;
+
+            background-color: var(--background2);
+            border-radius: 8px;
+            padding: 12px 12px 12px 12px;
         }
 
         img {
@@ -20,6 +29,53 @@
             height: 210px;
             margin-right: 10px;
             vertical-align: middle;
+            border-radius: 8px;
+        }
+        
+        .list {
+            margin-right: 10px;
+        }
+
+        #description {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .saw {
+            background-color: var(--accent2);
+        }
+
+        @media only screen and (max-width: 520px) {
+            .list {
+                width: 40px;
+                height: 15px;
+                margin-right: 1px;
+                margin-bottom: 1px;
+            }
+
+            img {
+                height: 150px;
+            }
+
+            #container {
+                font-size: 10px;
+            }
+
+            .list {
+                font-size: 10px;
+            }
+        }
+
+        @media only screen and (min-width: 1200px) {
+            .list {
+                width: 90px;
+                height: 30px;
+                font-size: 20px;
+            }
+
+            #container {
+                font-size: 20px;
+            }
         }
     </style>
 {% endblock %}
@@ -29,7 +85,7 @@
     <center>
         <div id="container">
             <img src="{{animeImage}}">
-            <p>{{animeDescription}}</p>
+            <p id="description">{{animeDescription}}</p>
         </div>
     </center>
 
@@ -38,7 +94,7 @@
     {% for index in range( len(animeCodes) ) %}
         <button class="list" onclick="location.href = '{{animeCodes[index]}}'">{{animeNames[index]}}</button>
 
-        {% if (index + 1) % 10 == 0 %}
+        {% if (index + 1) % 8 == 0 %}
             </center><br><center>
         {% endif %}
 

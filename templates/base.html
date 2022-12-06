@@ -4,136 +4,98 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/iosevka-extended" type="text/css"/> 
     <title>Adless Anime</title>
 
     <style>
-        img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50%;
-            width: 250px;
+        :root {
+            --background: #282828;
+            --background2: #1d2021;
+            --foreground: #ebdbb2;
+            --accent: #98971a;
+            --accent2: #b16286;
+            --navbarBackground: #689d6a;
         }
 
         body {
-            background-color: #282a36;
+            background-color: var(--background);
+            margin: 0;
+            padding: 0;
+            margin-top: 70px;
         }
 
-        .list, #search_btn, .control_btn {
-            width: 60px;
-            margin-bottom: 10px;
-            margin-right: 10px;
+        p, button, a {
+            color: var(--foreground);
+            font-family: "IosevkaExtended";
+        }
 
-            border: none;
+        button {
+            background-color: var(--accent);
+            border-radius: 8px;
             cursor: pointer;
-
-            color: #f8f8f2;
-            background-color: #44475a;
-
-            border-radius: 6px;
-
-            transform: translateY(0px);
-            transition: transform 180ms;
-        }
-
-        #search_btn {
-            width: 60px;
-            height: 45px;
-
-            margin-right: 0;
-        }
-
-        #search_inp {
-            height: 45px;
-
             border: none;
-            border-radius: 6px;
-
-            color: #f8f8f2;
-            background-color: #44475a;
-
-            text-align: center;
         }
 
-        .list:hover, .list:focus {
-            transform: translateY(-4px);
-        }
-
-        #control_btns {
-            text-align: center;
-        }
-
-        .control_btn {
-            width: 100px;
-        }
-        .control_btn:disabled {
-            background-color: #333541;
-        }
-
-        * {
-            margin:0px;
-            padding:0px;
-        }
-
-        #navbar {
-            height: 40px;
+        /* NAVBAR */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--navbarBackground);
+            height: 50px;
+            position: fixed;
+            z-index: 100;
+            top: 0;
             width: 100%;
-            background-color: #bd93f9;
-
-            margin-bottom: 12px;
         }
-
-        #navbar p {
-            margin: 0;
-            padding: 0;
-            padding-top: 8px;
-            padding-left: 10px;
-
-            text-align: center;
-        }
-
-        #navbar p a {
-            color: #f8f8f2;
+        
+        nav a {
+            margin-left: 10px;
             text-decoration: none;
+            color: var(--foreground);
         }
-
-        #searchbox {
-            text-align: center;
+        
+        nav div {
+            display: flex;
+            margin-right: 10px;
         }
-
-        video {
-            width: 80%;
-            height: auto;
+        
+        nav div button {
+            margin-left: 10px;
         }
-
-        #playdiv {
-            text-align: center;
+        
+        nav div input {
+            height: 15px;
         }
+        
+        @media only screen and (max-width: 520px) {
+            nav a {
+                font-size: 15px;
+            }
 
-        p {
-            margin: 0;
-            padding: 0;
-        }
-
-        .saw {
-            background-color: #333541;
-        }
-
-
-        a {
-            color: #ff79c6;
-        }
-        a:visited {
-            color: #bd93f9;
+            nav div input {
+                width: 120px;
+            }
         }
     </style>
 
     {% block head %}{% endblock %}
 </head>
 <body>
-    <div id="navbar">
-        <p><a href="/">Adless Anime</a></p>
-    </div>
+    <nav>
+        <h1><a href="/">Adless Anime</a></h1>
+
+        <div>
+            <input type="text" id="search_inp">
+            <button id="search_btn">Search</button>
+        </div>
+    </nav>
+
+    <script>
+        search_btn.addEventListener("click", () => {
+            location.href = '/search?search=' + document.getElementById("search_inp").value;
+        })
+    </script>
 
     {% block body %}{% endblock %}
 </body>

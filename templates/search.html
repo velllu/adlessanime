@@ -1,11 +1,48 @@
 {% extends 'base.html' %}
 
 {% block head %}
+    <style>
+        img {
+            width: 300px;
+            margin: 0;
+            padding: 0;
+            border-radius: 8px;
+        }
+
+        #cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 330px); /* see notes below */
+            grid-auto-rows: auto;
+            grid-gap: 10px;
+            justify-content: space-evenly;
+        }
+        
+        .card {
+            background-color: var(--background2);
+            width: 300px;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .card a {
+            color: var(--accent);
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
-    {% for i in range(len(animeNames)) %}
-        <img src="{{animeImages[i]}}">
-        <center><a href="{{animeLinks[i]}}">{{animeNames[i]}}</a></center> <br>
-    {% endfor %}
+    <section id="cards">
+        {% for i in range(len(animeNames)) %}
+            <article class="card">
+                <div class="container">
+                    <img src="{{animeImages[i]}}">
+                </div>
+
+                <div class="details">
+                    <a href="{{animeLinks[i]}}">{{animeNames[i]}}</a>
+                </div>
+            </article>
+        {% endfor %}
+    </section>
 {% endblock %}

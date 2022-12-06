@@ -1,16 +1,11 @@
 {% extends 'base.html' %}
 
 {% block head %}
+    <style>
+        h1 { color: white; }
+    </style>
 {% endblock %}
 
 {% block body %}
-    <div id="searchbox">
-        <input type="text" placeholder="Cerca un anime..." id="search_inp"> <button id="search_btn">Cerca</button>
-    </div>
-
-    <script>
-        search_btn.addEventListener("click", () => {
-            location.href = '/search?search=' + document.getElementById("search_inp").value;
-        })
-    </script>
+    <h1>page not done...</h1>
 {% endblock %}

@@ -2,26 +2,47 @@
 {% extends 'base.html' %}
 
 {% block head %}
+
+    <style>
+        video {
+            width: clamp(1px, 90%, 1600px);
+            border-radius: 8px;
+        }
+        
+        .control_btn {
+            margin-top: 10px;
+            width: 120px;
+        }
+
+        #not_saw_btn {
+            margin-left: 10px;
+        }
+    </style>
+
 {% endblock %}
 
 {% block body %}
 
-    <div id="playdiv">
-        <video autoplay="autoplay" controls>
-            <source src="{{animeVideoLink}}" type="video/mp4" codecs="avc1.42E01E, mp4a.40.2">
-        </video>
-    </div>
+    <center>
+        <div id="playdiv">
+            <video autoplay="autoplay" controls>
+                <source src="{{animeVideoLink}}" type="video/mp4" codecs="avc1.42E01E, mp4a.40.2">
+            </video>
+        </div>
+    </center>
 
-    <div id="control_btns">
-        <button id="saw_btn" class="control_btn">L'ho visto</button>
-        <button id="not_saw_btn" class="control_btn">Non l'ho visto</button>
-
-        <br>
-        <button id="back_btn" class="control_btn">Indietro</button>
-    </div>
+    <center>
+        <div id="control_btns">
+            <button id="saw_btn" class="control_btn">L'ho visto</button>
+            <button id="not_saw_btn" class="control_btn">Non l'ho visto</button>
+    
+            <br>
+            <button id="back_btn" class="control_btn">Indietro</button>
+        </div>
+    </center>
 
     <script>
-        if(localStorage.getItem("{{code}}") == "saw") {
+        if(localStorage.getItem("{{animeCode}}") == "saw") {
             document.getElementById("saw_btn").disabled = true
             document.getElementById("not_saw_btn").disabled = false
         } else {
@@ -30,11 +51,11 @@
         }
 
         saw_btn.addEventListener("click", () => {
-            localStorage.setItem("{{code}}", "saw")
+            localStorage.setItem("{{animeCode}}", "saw")
         });
         not_saw_btn.addEventListener("click", () => {
             console.log("removed")
-            localStorage.removeItem("{{code}}")
+            localStorage.removeItem("{{animeCode}}")
         });
 
         back_btn.addEventListener("click", () => {
