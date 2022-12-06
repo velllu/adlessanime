@@ -16,13 +16,17 @@ def search():
     animeImagesHTML = soup.find_all("img", loading="lazy") # All the <img> elements of the anime covers
     animeImages = [] # All urls to the images collected in a list
     for image in animeImagesHTML:
-        animeImages.append(image.get("src"))
+        if image.get("class") == None:           # There are also some images on the sidebar, but they have some classes,
+            animeImages.append(image.get("src")) # the anime we want to search have no classes
+                                                 # btw, animeImages is shorter then animeNames/Links for this reason,
+                                                 # this is why we loop with this later on on search.html
         
     animeNames = [] # Names of anime (e.g. "Naruto Shippuden")
     animeLinks = [] # URLs that redirect to the anime
     for anime in soup.find_all("a", class_="name"): # Every <a> that contains useful data
-        animeNames.append(anime.get("data-jtitle"))
-        animeLinks.append(anime.get("href").replace("play/", "episodes?anime="))
+        if anime.get("title") == None:
+            animeNames.append(anime.get("data-jtitle"))
+            animeLinks.append(anime.get("href").replace("play/", "episodes?anime="))
 
     return render_template("search.html", animeNames=animeNames, animeLinks=animeLinks, animeImages=animeImages, len=len)
 

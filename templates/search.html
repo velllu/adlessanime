@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
+
     <style>
         img {
             width: 300px;
@@ -11,7 +12,7 @@
 
         #cards {
             display: grid;
-            grid-template-columns: repeat(auto-fill, 330px); /* see notes below */
+            grid-template-columns: repeat(auto-fill, 330px);
             grid-auto-rows: auto;
             grid-gap: 10px;
             justify-content: space-evenly;
@@ -29,11 +30,14 @@
             color: var(--accent);
         }
     </style>
+
 {% endblock %}
 
 {% block body %}
     <section id="cards">
-        {% for i in range(len(animeNames)) %}
+
+        <!-- We use animeImages for looping because it's correctly sized, animeNames/Links also contain more anime from AnimeWorld's sidebar -->
+        {% for i in range(len(animeImages)) %}
             <article class="card">
                 <div class="container">
                     <img src="{{animeImages[i]}}">
