@@ -6,6 +6,11 @@ Adless Anime è un sito che prende dati da https://www.animeworld.tv/ e permette
 - Descrizione e copertine degli anime  
 - Impostare episodi come "gia visti"  
 
+## Screenshots
+![Ricerca](assets/screenshot_search.png)  
+![Lista episodi](assets/screenshot_episodes.png)  
+![Player](assets/screenshot_play.png)  
+
 ## Installazione
 ### Manuale
 Python 3.7+ dovrebbe andare bene, le dipendenze di python sono: `requests bs4 flask`, usare pip o installarle tramite la repository della tua distro, una volta installato il necessario, runnare con:  
