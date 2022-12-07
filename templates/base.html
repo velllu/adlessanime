@@ -55,16 +55,16 @@
             color: var(--foreground);
         }
         
-        nav div {
+        nav form {
             display: flex;
             margin-right: 10px;
         }
         
-        nav div button {
+        nav form button {
             margin-left: 10px;
         }
         
-        nav div input {
+        nav form input {
             height: 15px;
         }
         
@@ -73,7 +73,7 @@
                 font-size: 15px;
             }
 
-            nav div input {
+            nav form input {
                 width: 120px;
             }
         }
@@ -85,10 +85,10 @@
     <nav>
         <h1><a href="/">Adless Anime</a></h1>
 
-        <div>
+        <form action="javascript:void(0);">
             <input type="text" id="search_inp">
             <button id="search_btn">Search</button>
-        </div>
+        </form>
     </nav>
 
     <script>
