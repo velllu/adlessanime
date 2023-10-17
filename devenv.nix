@@ -1,4 +1,10 @@
+{ pkgs, ... }:
+
 {
+  packages = [
+    pkgs.nodePackages.pyright
+  ];
+
   languages.python = {
     enable = true;
     version = "3.12";
