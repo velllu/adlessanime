@@ -4,13 +4,15 @@ import bs4, requests, webbrowser
 
 app = Flask(__name__)
 
+animeworldUrl = "https://www.animeworld.so";
+
 @app.route('/')
 def index():
     return render_template("index.html")
 
 @app.route('/search')
 def search():
-    url = requests.get("https://www.animeworld.tv/search?keyword=" + request.args.get("search"))
+    url = requests.get(animeworldUrl + "/search?keyword=" + request.args.get("search"))
     soup = bs4.BeautifulSoup(url.text, "html.parser")
 
     animeImagesHTML = soup.find_all("img", loading="lazy") # All the <img> elements of the anime covers
@@ -32,7 +34,7 @@ def search():
 
 @app.route('/episodes')
 def episodes():
-    url = requests.get("https://www.animeworld.tv/play/" + request.args.get("anime"))
+    url = requests.get(animeworldUrl + "/play/" + request.args.get("anime"))
     soup = bs4.BeautifulSoup(url.text, "html.parser")
 
     animeImage = soup.find_all("img", loading="lazy")[6].get("src") # e.g. https://img.animeworld.tv/locandine/17407.jpg
@@ -66,7 +68,7 @@ def episodes():
 
 @app.route("/play")
 def play():
-    url = requests.get("https://www.animeworld.tv/play/" + request.args.get("code"))
+    url = requests.get(animeworldUrl + "/play/" + request.args.get("code"))
     soup = bs4.BeautifulSoup(url.text, "html.parser")
 
     animeVideoLink = soup.find("a", id="downloadLink").get("href")
