@@ -26,7 +26,7 @@
     <center>
         <div id="playdiv">
             <video autoplay="autoplay" controls>
-                <source src="{{animeVideoLink}}" type="video/mp4" codecs="avc1.42E01E, mp4a.40.2">
+                <source src="{{download_link}}" type="video/mp4" codecs="avc1.42E01E, mp4a.40.2">
             </video>
         </div>
     </center>
@@ -42,7 +42,7 @@
     </center>
 
     <script>
-        if(localStorage.getItem("{{animeCode}}") == "saw") {
+        if(localStorage.getItem("{{anime_id}}/{{episode_id}}") == "saw") {
             document.getElementById("saw_btn").disabled = true
             document.getElementById("not_saw_btn").disabled = false
         } else {
@@ -51,15 +51,14 @@
         }
 
         saw_btn.addEventListener("click", () => {
-            localStorage.setItem("{{animeCode}}", "saw")
+            localStorage.setItem("{{anime_id}}/{{episode_id}}", "saw")
         });
         not_saw_btn.addEventListener("click", () => {
-            console.log("removed")
-            localStorage.removeItem("{{animeCode}}")
+            localStorage.removeItem("{{anime_id}}/{{episode_id}}")
         });
 
         back_btn.addEventListener("click", () => {
-            location.href = "/episodes?anime={{animeCode.split('/')[0]}}"
+            location.href = "/episodes?anime={{anime_id.split('/')[0]}}"
         })
     </script>
 

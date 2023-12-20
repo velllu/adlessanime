@@ -84,15 +84,20 @@
 
     <center>
         <div id="container">
-            <img src="{{animeImage}}">
-            <p id="description">{{animeDescription}}</p>
+            <img src="{{episode_data.image}}">
+            <p id="description">{{episode_data.description}}</p>
         </div>
     </center>
 
     <center>
 
-    {% for index in range( len(animeCodes) ) %}
-        <button class="list" onclick="location.href = '{{animeCodes[index]}}'">{{animeNames[index]}}</button>
+    {% for index, episode in enumerate(episode_data.episodes) %}
+        <button
+        class="list"
+        onclick="location.href = '/play?episode={{episode.id}}&anime={{anime_id}}'"
+        episode="{{anime_id}}/{{episode.id}}">
+            {{episode.title}}
+        </button>
 
         {% if (index + 1) % 8 == 0 %}
             </center><br><center>
@@ -101,10 +106,13 @@
     {% endfor %}
 
     <script>
-        var buttons = document.getElementsByClassName("list");
+        let buttons = document.getElementsByClassName("list");
+
         for (let i = 0; i < buttons.length; i++) {
-            if(localStorage.getItem(buttons[i].getAttribute("onclick").split("'")[1].split("=")[1]) == "saw") {
-                buttons[i].classList += " saw"
+            let id = buttons[i].getAttribute("episode");
+
+            if(localStorage.getItem(id)) {
+                buttons[i].classList += " saw";
             }
         }
     </script>

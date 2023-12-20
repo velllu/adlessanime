@@ -5,4 +5,4 @@ RUN pip install -r requirements.txt
 WORKDIR /project
 ADD . /project
 EXPOSE 10138
-CMD ["python", "app.py"]
+CMD ["python", "src/main.py"]

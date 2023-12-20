@@ -34,19 +34,19 @@
 {% endblock %}
 
 {% block body %}
-    <section id="cards">
 
-        <!-- We use animeImages for looping because it's correctly sized, animeNames/Links also contain more anime from AnimeWorld's sidebar -->
-        {% for i in range(len(animeImages)) %}
+    <section id="cards">
+        {% for anime in animes %}
             <article class="card">
                 <div class="container">
-                    <img src="{{animeImages[i]}}">
+                    <img src="{{anime.image}}">
                 </div>
 
                 <div class="details">
-                    <a href="{{animeLinks[i]}}">{{animeNames[i]}}</a>
+                    <a href="/episodes?anime={{anime.id}}">{{anime.title}}</a>
                 </div>
             </article>
         {% endfor %}
     </section>
+
 {% endblock %}
